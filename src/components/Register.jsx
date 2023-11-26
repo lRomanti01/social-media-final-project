@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { auth } from "../config/firebase";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "../styles/Register.css";
@@ -25,17 +25,20 @@ function Register() {
         return;
       }
 
-      const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+      const userCredentials = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredentials.user;
-    
+
       await updateProfile(user, {
         displayName: `${name} ${lastName}`,
-        username: username
+        username: username,
       });
 
       toast.success("Logged in successfully");
       Navigate("/");
-
     } catch (error) {
       toast.error(error);
       toast.error("Failed to sign up");

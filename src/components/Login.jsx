@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../config/firebase";
 import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
@@ -28,7 +28,7 @@ function Login() {
 
   const signInEmail = (e) => {
     e.preventDefault();
-      signInWithEmailAndPassword(auth, email, password)
+    signInWithEmailAndPassword(auth, email, password)
       .then((authUser) => {
         Navigate("/");
         toast.success("Logged in successfully");

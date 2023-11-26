@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
-import { db } from "../firebase";
-import "../styles/Post.css";
+import { db } from "../config/firebase";
 import { Link, useNavigate } from "react-router-dom";
 import {
   collection,
   doc,
-  getDocs,
   setDoc,
   addDoc,
   deleteDoc,
@@ -16,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart, FaComment } from "react-icons/fa";
-import Upload from "./Upload";
+import "../styles/Post.css";
 
 function Post({ postId, post, user }) {
   const [comments, setComments] = useState([]);
@@ -100,20 +98,17 @@ function Post({ postId, post, user }) {
 
   const postComment = async (event) => {
     event.preventDefault();
-
     try {
       const commentData = {
         text: comment,
         username: user.displayName || user.email.split("@")[0],
         timestamp: serverTimestamp(),
       };
-
       const commentRef = await addDoc(
         collection(db, `posts/${postId}/comments`),
         commentData
       );
 
-      console.log("Comment added with ID: ", commentRef.id);
       setComment("");
     } catch (error) {
       console.error("Error adding comment: ", error);
@@ -121,9 +116,7 @@ function Post({ postId, post, user }) {
   };
 
   return (
-    <>
-      <Upload user={user} />
-
+    <div>
       {post && (
         <div className="post">
           <div className="postHeader">
@@ -208,7 +201,7 @@ function Post({ postId, post, user }) {
           )}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

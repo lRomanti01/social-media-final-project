@@ -13,7 +13,7 @@ import {
   deleteDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import { Link } from "react-router-dom";
 import "../styles/SinglePost.css";
 import { FaHeart } from "react-icons/fa";
@@ -50,10 +50,10 @@ function SinglePost({ user }) {
             setPost(postDoc.data());
             console.log(postDoc.data());
           } else {
-            console.log("El documento no existe");
+            console.log("The document does not exist");
           }
         } catch (error) {
-          console.error("Error obteniendo el documento:", error);
+          console.error("Error obtaining document:", error);
         }
       };
 
@@ -102,7 +102,6 @@ function SinglePost({ user }) {
         setDoc(userLikesRef, { post: id })
           .then(() => {
             setIsLiked(true);
-            console.log("Liked Photo!");
           })
           .catch((error) => {
             console.error("Error liking: ", error);
@@ -111,7 +110,6 @@ function SinglePost({ user }) {
         deleteDoc(userLikesRef)
           .then(() => {
             setIsLiked(false);
-            console.log("Unliked Photo!");
           })
           .catch((error) => {
             console.error("Error unliking: ", error);

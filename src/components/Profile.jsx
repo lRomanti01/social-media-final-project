@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase";
+import { db } from "../config/firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import "../styles/Profile.css";
 import { useStateValue } from "../StateProvider";
@@ -18,7 +18,7 @@ function Profile() {
   const [{ user }, dispatch] = useStateValue();
   const Navigate = useNavigate();
 
-  console.log(user)
+  console.log(user);
 
   useEffect(() => {
     document.title = `${posts[0]?.post.username} | SocialMedia`;
