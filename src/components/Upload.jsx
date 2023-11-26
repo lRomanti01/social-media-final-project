@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import { FaPlus } from "react-icons/fa";
@@ -16,8 +16,6 @@ function Upload({ user }) {
   const [fileName, setFileName] = useState("");
   const [progress, setProgress] = useState(0);
 	const Navigate = useNavigate(); 
-  const upload = useRef(null)
-  const filter = useRef(null)
 
   const handleFileChange = (e) => {
     if (e.target.files[0]) {
@@ -40,7 +38,7 @@ function Upload({ user }) {
   }
 
   const closeUpload = () => {
-    upload.current.style.display = "none";
+    document.querySelector(".upload").style.display = "none";
     document.querySelector(".filter").style.display = "none";
   }
 
@@ -50,7 +48,7 @@ function Upload({ user }) {
 			Navigate('/login')
 			return
 		}
-    upload.current.style.display = "grid";
+    document.querySelector(".upload").style.display = "grid";
     document.querySelector(".filter").style.display = "block";
 
   }
@@ -98,7 +96,7 @@ function Upload({ user }) {
 	return (
 		<div className="uploadContainer">
 			<div className="addPostBtn" onClick={openUpload}><FaPlus /></div>
-			<div ref={upload} className="upload">
+			<div className="upload">
 				<div className="uploadContent">
 				
 					{file &&

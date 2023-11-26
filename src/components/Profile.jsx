@@ -18,6 +18,8 @@ function Profile() {
   const [{ user }, dispatch] = useStateValue();
   const Navigate = useNavigate();
 
+  console.log(user)
+
   useEffect(() => {
     document.title = `${posts[0]?.post.username} | SocialMedia`;
   }, [posts[0]?.post.username]);

@@ -5,7 +5,6 @@ import { signInWithPopup, signInWithEmailAndPassword } from "firebase/auth";
 import { FcGoogle } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import "../styles/Login.css";
-import "react-toastify/dist/ReactToastify.css";
 
 function Login() {
   const Navigate = useNavigate();

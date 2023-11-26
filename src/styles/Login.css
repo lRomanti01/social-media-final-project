@@ -7,6 +7,7 @@
 }
 
 .loginContainer {
+	width: 50vw;
 	max-width: 600px;
 	padding: 40px;
 	text-align: center;
@@ -26,11 +27,22 @@
 	color: var(--white);
 	cursor: pointer;
 	font-weight: bold;
+	transition: all .3s;
+}
+
+.loginContainer button:hover {
+	background-color: var(--white);
+	color: var(--purple);
 }
 
 .loginContainer .loginRegisterButton {
     background-color: var(--input);
     color: var(--theme);
+}
+
+.loginContainer .loginRegisterButton:hover {
+	background-color: var(--theme);
+	color: var(--input);
 }
 
 .loginContainer > form > h5 {
@@ -56,6 +68,7 @@
 .loginSignInButtonGoogle{
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
+	justify-content: center;
 	align-items: center;
+	gap: 5px;
 }

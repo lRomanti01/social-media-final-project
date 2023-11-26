@@ -7,6 +7,7 @@
 }
 
 .RegisterContainer {
+	width: 50vw;
 	max-width: 600px;
 	padding: 40px;
 	text-align: center;
@@ -26,6 +27,12 @@
 	color: var(--white);
 	cursor: pointer;
 	font-weight: bold;
+	transition: all .3s;
+}
+
+.RegisterContainer button:hover {
+	background-color: var(--white);
+	color: var(--purple);
 }
 
 .RegisterContainer .RegisterRegisterButton {
