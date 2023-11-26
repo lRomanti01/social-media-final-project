@@ -1,35 +1,86 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Route, Routes, BrowserRouter as Router, Navigate } from 'react-router-dom';
+import Header from './components/Header';
+import Login from './components/Login';
+import Post from './components/Post';
+import SinglePost from './components/SinglePost';
+import Profile from './components/Profile';
+import Upload from './components/Upload';
+import Footer from './components/Footer';
+import { db, auth } from './firebase';
+import './App.css';
+import { useEffect, useState } from 'react';
+import { useStateValue } from './StateProvider';
+import { collection, onSnapshot, orderBy } from 'firebase/firestore';
+import Register from './components/Register';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [{ user }, dispatch] = useStateValue();
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(collection(db, 'posts'), orderBy('timestamp', 'desc'), (snapshot) => {
+      setPosts(snapshot.docs.map((doc) => ({
+        id: doc.id,
+        post: doc.data(),
+      })));
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      if (authUser) {
+        dispatch({
+          type: 'SET_USER',
+          user: authUser,
+        });
+      } else {
+        dispatch({
+          type: 'SET_USER',
+          user: null,
+        });
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="App">
+      <div className="filter"></div>
+      <Router>
+        <Header />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/post/:id" element={<SinglePost user={user}/>} />
+          <Route path="/profile/:userid" element={<Profile />} />
+          <Route path="/" element={<HomePage posts={posts} user={user} />} />
+          <Route path="*" element={<Navigate to="/" />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </div>
+  );
 }
 
-export default App
+// Nueva función para renderizar el contenido de la página principal
+function HomePage({ posts, user }) {
+  return (
+    <>
+      <div className="posts">
+        {posts.map(({ id, post }) => (
+          <Post key={id} postId={id} user={user} post={post} />
+        ))}
+      </div>
+    </>
+  );
+}
+
+export default App;

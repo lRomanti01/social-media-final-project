@@ -1,68 +1,79 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,700;1,400&display=swap");
+
+* {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	font-family: "Montserrat", sans-serif;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	--white: #f8f8f8;
+	--light: #f8f8f8;
+	--head-light: #f8f8f8;
+	--grey: #232323;
+	--gradient-grey: #232323;
+	--skill-grey: #272727;
+	--theme: #8148eb;
+	--dark: #191919;
+	--purple: #8e61e2;
+	--logo-bg: none;
+	--light-purple: #bd6df2;
+	--shadow: none;
+	--icon-bg: #5555556e;
+	--gradient: linear-gradient(134deg, #836af0 0%, #8e49dc 99%);
+	--gradient-light: linear-gradient(99deg, #836af0 0%, #8e49dc 130%);
+	--input: #f0f0f0;
+	--filter: brightness(20%);
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+.light {
+	--light: #8949dc;
+	--head-light: #313131;
+	--grey: #f8f8f8;
+	--gradient-grey: var(--gradient);
+	--skill-grey: #dfc7ff;
+	--dark: #f0ecec;
+	--logo-bg: #8e61e2;
+	--light-purple: #f8f8f8;
+	--shadow: -1px 3px 12px 0px #8b8b8b21;
+	--icon-bg: rgba(209, 209, 209, 0.233);
+	--input: #eeeeee;
+	--filter: contrast(15%);
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+#root {
+	color: var(--light);
+	background: var(--dark);
+	min-height: 100vh;
+	-webkit-transition: 200ms ease-in-out;
+	transition: 200ms ease-in-out;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+html {
+	scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+input {
+	text-align: left;
+	color: var(--head-light)
+}
+
+button:disabled {
+	cursor: not-allowed;
+	opacity: 0.5;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--grey)
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--purple);
+    border-radius: 5px;
 }
