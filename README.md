@@ -1,4 +1,4 @@
-SOCIAL MEDIA
+**SOCIAL MEDIA**
 
 La aplicación es una red social desarrollada en React que utiliza Firebase como backend para el almacenamiento de datos, autenticación de usuarios y gestión de archivos. La plataforma permite a los usuarios registrarse, iniciar sesión, crear perfiles, publicar contenido, dar "me gusta" y comentar publicaciones.
 
